@@ -1,0 +1,29 @@
+name: JANCLUB Shop Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Java Kur
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Projeyi indir
+        uses: actions/checkout@v4
+
+      - name: Derle
+        run: mvn -B package
+
+      - name: JAR Dosyasını Yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: JANCLUB-Shop
+          path: target/*.jar
